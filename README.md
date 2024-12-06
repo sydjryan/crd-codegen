@@ -13,6 +13,10 @@ Using the Strimzi operator as an example:
 go get
 export PATH=$PATH:$(go env GOPATH)
 
+# install go-jsonschema (https://github.com/omissis/go-jsonschema)
+brew tap omissis/go-jsonschema
+brew install go-jsonschema
+
 # download CRD's for strimzi operator
 VERSION=0.21.1
 wget https://github.com/strimzi/strimzi-kafka-operator/releases/download/${VERSION}/strimzi-crds-${VERSION}.yaml
