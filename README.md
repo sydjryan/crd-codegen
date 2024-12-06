@@ -18,14 +18,14 @@ brew tap omissis/go-jsonschema
 brew install go-jsonschema
 
 # download CRD's for strimzi operator
-VERSION=0.21.1
+VERSION=0.41.1
 wget https://github.com/strimzi/strimzi-kafka-operator/releases/download/${VERSION}/strimzi-crds-${VERSION}.yaml
 
 # generate types using the CRD
 ./generate.sh strimzi-crds-${VERSION}.yaml
 
 # generated apis are found in 'generated' directory:
-ls generated/apis/kafka.strimzi.io/v1beta1/
+ls generated/apis/kafka.strimzi.io/v1beta2/
 
-# KafkaConnect.go  KafkaConnectS2I.go  Kafka.go  KafkaMirrorMaker.go  KafkaTopic.go  KafkaUser.go
+# Kafka.go  KafkaConnect.go  KafkaMirrorMaker.go  KafkaNodePool.go  KafkaTopic.go  KafkaBridge.go  KafkaConnector.go   KafkaMirrorMaker2.go   KafkaRebalance.go   KafkaUser.go
 ```
