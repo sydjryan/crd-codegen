@@ -26,6 +26,7 @@ for name in $NAMES; do
     ./generate_schemas -in=generated/crds/$name.yaml -out=generated/schemas/$name-schema.json
     CR_GROUP=$(yq eval ".spec.group" generated/crds/$name.yaml)
     CR_KIND=$(yq eval ".spec.names.kind" generated/crds/$name.yaml)
-    CR_VER=$(yq eval ".spec.version" generated/crds/$name.yaml)
-    gojsonschema -p $CR_VER -o generated/apis/$CR_GROUP/$CR_VER/$CR_KIND.go generated/schemas/$name-schema.json
+    CR_VER=$(yq eval ".spec.versions[0].name" generated/crds/$name.yaml)
+    go-jsonschema -p $CR_VER -o generated/apis/$CR_GROUP/$CR_VER/$CR_KIND.go generated/schemas/$name-schema.json
+    echo "$CR_KIND generated"
 done
