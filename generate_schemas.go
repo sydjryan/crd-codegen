@@ -3,8 +3,8 @@ package main
 import (
 	"flag"
 	"fmt"
-	"io/ioutil"
 	"log"
+	"os"
 
 	"encoding/json"
 
@@ -20,10 +20,10 @@ import (
 
 // JSONSchema describes json schema file
 type JSONSchema struct {
-	Schema      string                                   `json:"$schema"`
-	Ref         string                                   `json:"$ref"`
-	ID          string                                   `json:"$id"`
-	Title       string                                   `json:"$title"`
+	Schema      string                              `json:"$schema"`
+	Ref         string                              `json:"$ref"`
+	ID          string                              `json:"$id"`
+	Title       string                              `json:"$title"`
 	Definitions map[string]apiextv1.JSONSchemaProps `json:"definitions"`
 }
 
@@ -68,7 +68,7 @@ func decodeCRD(jsonBytes []byte) (*apiextv1.CustomResourceDefinition, error) {
 
 func generate(in *string, out *string) {
 	// read yaml
-	yb, err := ioutil.ReadFile(*in)
+	yb, err := os.ReadFile(*in)
 	if err != nil {
 		log.Fatalf("failed to read file: %v", err)
 	}
@@ -98,7 +98,7 @@ func generate(in *string, out *string) {
 	if err != nil {
 		log.Fatalf("failed to marshal json: %v", err)
 	}
-	err = ioutil.WriteFile(*out, output, 0644)
+	err = os.WriteFile(*out, output, 0644)
 	if err != nil {
 		log.Fatalf("failed to write file: %v", err)
 	}
